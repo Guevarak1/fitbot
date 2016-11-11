@@ -18,7 +18,7 @@ app.get('/', function(req,res){
 	res.send("Hi i am a chatbot");
 })
 
-token = "EAACngySG46UBADS52hRQhEuJnGlSEIF8jzozZCkjJiohxZCg1ZABeAZAKCs4YeXc84WoNyS2FkD8ZBcLrRL4XlMBZAGEwf922w4tzPp8iaSZB0PnFx3XYTl4ZC3sBLBbKNQbeFnq53ZBfn82WEeT3MhFBYXiM8NKJNGfIo0UniRvMHwZDZD"
+let token = "EAACngySG46UBADS52hRQhEuJnGlSEIF8jzozZCkjJiohxZCg1ZABeAZAKCs4YeXc84WoNyS2FkD8ZBcLrRL4XlMBZAGEwf922w4tzPp8iaSZB0PnFx3XYTl4ZC3sBLBbKNQbeFnq53ZBfn82WEeT3MhFBYXiM8NKJNGfIo0UniRvMHwZDZD"
 //Facebook
 
 app.get('/webhook/', function(req, res){
@@ -30,7 +30,7 @@ app.get('/webhook/', function(req, res){
 })
 
 app.post('/webhook/', function(req,res){
-	let messaging_events = req.body.entry[0].messaging_events
+	let messaging_events = req.body.entry[0].messaging
 	for(let i = 0; i < messaging_events.length; i++){
 		let event = messaging_events[i]
 		let sender = event.sender.id
@@ -49,7 +49,7 @@ function sendText(sender, text){
 		qs: {access_token: token},
 		method: "POST",
 		json: {
-			receipt: {id:sender},
+			recipient: {id:sender},
 			message: messageData
 		}
 	}, function(error, response, body){
