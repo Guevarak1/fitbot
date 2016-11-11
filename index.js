@@ -20,7 +20,7 @@ app.get('/', function(req,res){
 
 //Facebook
 
-app.get('/webhook/', function(req. res){
+app.get('/webhook/', function(req, res){
 
 	if(req.query['hub.verify_token'] === "blondiebytes"){
 		res.send(req.query['hub.challenge'])
