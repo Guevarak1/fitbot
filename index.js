@@ -125,6 +125,7 @@ function sendGenericMessage(sender) {
             }
         }
     }
+    sendRequest(sender, messageData)
 }
 
 function sendRequest(sender, messageData) {
