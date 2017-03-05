@@ -13,14 +13,14 @@ app.use(bodyParser.urlencoded({ extended: false }))
 app.use(bodyParser.json())
 
 //Routes
-
+//when going into heroku and launching the app 
 app.get('/', function(req, res) {
     res.send("Hi i am a chatbot");
 })
 
 let token = "EAACngySG46UBAPbnA5ARqr7bLT5iA4YOGYl3frRBuSpwPpDh2Cj5J6DpJP6E7YmZCLH7ZA3LT2xIzsDdWsqxxM8RtrZAP4Bod1ZA7D13CjPrRxZAGvLe6HQHl0nZCALtZBlhRb4GvpZAOZBQZBvMx87IZAUPPXv647JfZCsqDuXx00MlWgZDZD"
-    //Facebook
 
+//Facebook
 app.get('/webhook/', function(req, res) {
 
     if (req.query['hub.verify_token'] === "blondiebytes") {
@@ -34,11 +34,14 @@ app.post('/webhook/', function(req, res) {
     for (let i = 0; i < messaging_events.length; i++) {
         let event = messaging_events[i]
         let sender = event.sender.id
+
+        //regular message coming in from user
         if (event.message && event.message.text) {
             let text = event.message.text
             decideMessage(sender, text)
-                //sendText(sender, "Text echo: " + text.substring(0,100))
         }
+
+        //postback is the users reponse to a query from the bot
         if (event.postback) {
             let text = JSON.stringify(event.postback)
             decideMessage(sender, text)
@@ -49,15 +52,121 @@ app.post('/webhook/', function(req, res) {
 
 function decideMessage(sender, text1) {
     let text = text1.toLowerCase()
-    if (text.includes("summer")) {
-        sendImageMessage(sender)
-    } else if (text.includes("winter")) {
+
+    //default muscle groups
+    if (text.includes("chest")) {
         sendGenericMessage(sender)
+    } else if (text.includes("back")) {
+        sendGenericMessage(sender)
+    } else if (text.includes("legs")) {
+        sendGenericMessage(sender)
+    } else if (text.includes("shoulders")) {
+        sendGenericMessage(sender)
+
+        //give user a list of default muscle groups to choose from
     } else {
-        sendText(sender, "I like fall");
-        sendButtonMessage(sender, "What is your favorite season");
+        sendText(sender, "Welcome to the Fitbot! Which muscle group are you working out today?");
+        //sendButtonMessage(sender, "What is your favorite season");
+        sendMuscleGroupMessage(sender)
     }
 }
+
+function sendMuscleGroupMessage(sender, text) {
+   
+    let messageData = {
+        "attachment": {
+            "type": "template",
+            "payload": {
+                "template_type": "list",
+                "elements": [{
+                    "title": "Muscle Groups",
+                    "image_url": "http://vignette2.wikia.nocookie.net/humongous/images/f/f8/Barbell.png/revision/latest?cb=20160404211047",
+                    "subtitle": "Choose a muscle group for todays workout",
+                    // "default_action": {
+                    //     "type": "web_url",
+                    //     "url": "https://peterssendreceiveapp.ngrok.io/shop_collection",
+                    //     "messenger_extensions": true,
+                    //     "webview_height_ratio": "tall",
+                    //     "fallback_url": "https://peterssendreceiveapp.ngrok.io/"
+                    // },
+                    // "buttons": [{
+                    //     "title": "View",
+                    //     "type": "web_url",
+                    //     "url": "https://peterssendreceiveapp.ngrok.io/collection",
+                    //     "messenger_extensions": true,
+                    //     "webview_height_ratio": "tall",
+                    //     "fallback_url": "https://peterssendreceiveapp.ngrok.io/"
+                    // }]
+                }, {
+                    "title": "Chest Day",
+                    //"image_url": "https://peterssendreceiveapp.ngrok.io/img/white-t-shirt.png",
+                    "subtitle": "Exercise that targets your chest.",
+                    // "default_action": {
+                    //     "type": "web_url",
+                    //     "url": "https://peterssendreceiveapp.ngrok.io/view?item=100",
+                    //     "messenger_extensions": true,
+                    //     "webview_height_ratio": "tall",
+                    //     "fallback_url": "https://peterssendreceiveapp.ngrok.io/"
+                    // },
+                    "buttons": [{
+                        "title": "Select",
+                        "type": "web_url",
+                        "url": "http://www.bodybuilding.com/content/10-best-chest-exercises-for-building-muscle.html",
+                        "messenger_extensions": true,
+                        "webview_height_ratio": "tall",
+                        "fallback_url": "https://www.bodybuilding.com/"
+                    }]
+                }, {
+                    "title": "Back Day",
+                    //"image_url": "https://peterssendreceiveapp.ngrok.io/img/blue-t-shirt.png",
+                    "subtitle": "Exercise that targets your back",
+                    // "default_action": {
+                    //     "type": "web_url",
+                    //     "url": "https://peterssendreceiveapp.ngrok.io/view?item=101",
+                    //     "messenger_extensions": true,
+                    //     "webview_height_ratio": "tall",
+                    //     "fallback_url": "https://peterssendreceiveapp.ngrok.io/"
+                    // },
+                    "buttons": [{
+                        "title": "Select",
+                        "type": "web_url",
+                        "url": "http://www.bodybuilding.com/content/10-best-muscle-building-back-exercises.html",
+                        "messenger_extensions": true,
+                        "webview_height_ratio": "tall",
+                        "fallback_url": "https://www.bodybuilding.com/"
+                    }]
+                }, {
+                    "title": "Leg Day",
+                    //"image_url": "http://www.bodybuilding.com/content/5-leg-workouts-for-mass-a-beginners-guide.html",
+                    "subtitle": "100% Cotton, 200% Comfortable",
+                    // "default_action": {
+                    //     "type": "web_url",
+                    //     "url": "https://peterssendreceiveapp.ngrok.io/view?item=102",
+                    //     "messenger_extensions": true,
+                    //     "webview_height_ratio": "tall",
+                    //     "fallback_url": "https://peterssendreceiveapp.ngrok.io/"
+                    // },
+                    "buttons": [{
+                        "title": "Select",
+                        "type": "web_url",
+                        "url": "http://www.bodybuilding.com/content/5-leg-workouts-for-mass-a-beginners-guide.html",
+                        "messenger_extensions": true,
+                        "webview_height_ratio": "tall",
+                        "fallback_url": "https://www.bodybuilding.com/"
+                    }]
+                 }]
+                //,
+                // "buttons": [{
+                //     "title": "View More",
+                //     "type": "postback",
+                //     "payload": "payload"
+                // }]
+            }
+        }
+    }
+    sendRequest(sender, messageData)
+}
+
 
 function sendText(sender, text) {
     let messageData = { text: text }
