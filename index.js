@@ -100,31 +100,43 @@ function sendImageMessage(sender) {
 }
 
 function sendGenericMessage(sender) {
-    let messageData = {
-        "attachment": {
-            "type": "template",
-            "payload": {
-                "template_type": "generic",
-                "elements": [{
-                    "title": "Winter",
-                    "subtitle": "I love winter",
-					"image_url": "http://www.almanac.com/sites/default/files/styles/primary_image_in_article/public/image_nodes/winter-solstice.jpg?itok=Pvf11DFE",					
-					"default_action": {
-			              "type": "web_url",
-			              "url": "google.com",
-			              "messenger_extensions": true,
-			              "webview_height_ratio": "tall",
-			              "fallback_url": "google.com"
-			            },
-                    "buttons": [{
-                        "type": "web_url",
-                        "url": "https://en.wikipedia.org/wiki/Winter",
-                        "title": "More about winter!"
+    var messageData = {
+        attachment: {
+            type: "template",
+            payload: {
+                template_type: "generic",
+                elements: [{
+                    title: "rift",
+                    subtitle: "Next-generation virtual reality",
+                    item_url: "https://www.oculus.com/en-us/rift/",
+                    image_url: "http://www.almanac.com/sites/default/files/styles/primary_image_in_article/public/image_nodes/winter-solstice.jpg?itok=Pvf11DFE",
+                    buttons: [{
+                        type: "web_url",
+                        url: "https://www.oculus.com/en-us/rift/",
+                        title: "Open Web URL"
+                    }, {
+                        type: "postback",
+                        title: "Call Postback",
+                        payload: "Payload for first bubble",
+                    }],
+                }, {
+                    title: "touch",
+                    subtitle: "Your Hands, Now in VR",
+                    item_url: "https://www.oculus.com/en-us/touch/",
+                    image_url: "http://www.almanac.com/sites/default/files/styles/primary_image_in_article/public/image_nodes/winter-solstice.jpg?itok=Pvf11DFE",
+                    buttons: [{
+                        type: "web_url",
+                        url: "https://www.oculus.com/en-us/touch/",
+                        title: "Open Web URL"
+                    }, {
+                        type: "postback",
+                        title: "Call Postback",
+                        payload: "Payload for second bubble",
                     }]
                 }]
             }
         }
-    }
+    };
     sendRequest(sender, messageData)
 }
 
