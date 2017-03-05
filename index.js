@@ -92,7 +92,7 @@ function sendImageMessage(sender) {
         "attachment": {
             "type": "image",
             "payload": {
-                "url": "https://petersapparel.com/img/shirt.png"
+                "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/c/c4/Field_Hamois_Belgium_Luc_Viatour.jpg/800px-Field_Hamois_Belgium_Luc_Viatour.jpg"
             }
         }
     }
@@ -108,17 +108,11 @@ function sendGenericMessage(sender) {
                 "elements": [{
                     "title": "Winter",
                     "subtitle": "I love winter",
-                    "default_action": {
-                        "type": "web_url",
-                        "url": "https://peterssendreceiveapp.ngrok.io/view?item=103",
-                        "messenger_extensions": true,
-                        "webview_height_ratio": "tall",
-                        "fallback_url": "https://peterssendreceiveapp.ngrok.io/"
-                    },
+					"image_url": "http://www.almanac.com/sites/default/files/styles/primary_image_in_article/public/image_nodes/winter-solstice.jpg?itok=Pvf11DFE",					
                     "buttons": [{
                         "type": "web_url",
                         "url": "https://en.wikipedia.org/wiki/Winter",
-                        "title": "More about winter"
+                        "title": "More about winter!"
                     }]
                 }]
             }
