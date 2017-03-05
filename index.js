@@ -78,7 +78,7 @@ function sendButtonMessage(sender, text) {
                     "payload": "summer"
                 }, {
                     "type": "postback",
-                    "title": "winter",
+                    "title": "Winter",
                     "payload": "winter"
                 }]
             }
@@ -109,6 +109,13 @@ function sendGenericMessage(sender) {
                     "title": "Winter",
                     "subtitle": "I love winter",
 					"image_url": "http://www.almanac.com/sites/default/files/styles/primary_image_in_article/public/image_nodes/winter-solstice.jpg?itok=Pvf11DFE",					
+					"default_action": {
+			              "type": "web_url",
+			              "url": "google.com",
+			              "messenger_extensions": true,
+			              "webview_height_ratio": "tall",
+			              "fallback_url": "google.com"
+			            },
                     "buttons": [{
                         "type": "web_url",
                         "url": "https://en.wikipedia.org/wiki/Winter",
