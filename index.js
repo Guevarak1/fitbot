@@ -55,13 +55,13 @@ function decideMessage(sender, text1) {
 
     //default muscle groups
     if (text.includes("chest")) {
-        sendGenericMessage(sender)
+        sendMuscleGroupMessage(sender)
     } else if (text.includes("back")) {
-        sendGenericMessage(sender)
+        sendMuscleGroupMessage(sender)
     } else if (text.includes("legs")) {
-        sendGenericMessage(sender)
+        sendMuscleGroupMessage(sender)
     } else if (text.includes("shoulders")) {
-        sendGenericMessage(sender)
+        sendMuscleGroupMessage(sender)
 
         //give user a list of default muscle groups to choose from
     } else {
