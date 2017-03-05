@@ -55,13 +55,13 @@ function decideMessage(sender, text1) {
 
     //default muscle groups
     if (text.includes("chest")) {
-        sendMuscleGroupMessage(sender)
+        sendGenericMessage(sender)
     } else if (text.includes("back")) {
-        sendMuscleGroupMessage(sender)
+        sendGenericMessage(sender)
     } else if (text.includes("legs")) {
-        sendMuscleGroupMessage(sender)
+        sendGenericMessage(sender)
     } else if (text.includes("shoulders")) {
-        sendMuscleGroupMessage(sender)
+        sendGenericMessage(sender)
 
         //give user a list of default muscle groups to choose from
     } else {
@@ -73,94 +73,50 @@ function decideMessage(sender, text1) {
 
 function sendMuscleGroupMessage(sender, text) {
    
-    let messageData = {
-        "attachment": {
-            "type": "template",
-            "payload": {
-                "template_type": "list",
-                "elements": [{
-                    "title": "Muscle Groups",
-                    "image_url": "http://vignette2.wikia.nocookie.net/humongous/images/f/f8/Barbell.png/revision/latest?cb=20160404211047",
-                    "subtitle": "Choose a muscle group for todays workout",
-                    // "default_action": {
-                    //     "type": "web_url",
-                    //     "url": "https://peterssendreceiveapp.ngrok.io/shop_collection",
-                    //     "messenger_extensions": true,
-                    //     "webview_height_ratio": "tall",
-                    //     "fallback_url": "https://peterssendreceiveapp.ngrok.io/"
-                    // },
-                    // "buttons": [{
-                    //     "title": "View",
-                    //     "type": "web_url",
-                    //     "url": "https://peterssendreceiveapp.ngrok.io/collection",
-                    //     "messenger_extensions": true,
-                    //     "webview_height_ratio": "tall",
-                    //     "fallback_url": "https://peterssendreceiveapp.ngrok.io/"
-                    // }]
+    var messageData = {
+        attachment: {
+            type: "template",
+            payload: {
+                template_type: "list",
+                elements: [{
+                    title: "Muscle Groups",
+                    image_url: "http://vignette2.wikia.nocookie.net/humongous/images/f/f8/Barbell.png/revision/latest?cb=20160404211047",
+                    subtitle: "Choose a muscle group for todays workout"
                 }, {
-                    "title": "Chest Day",
-                    //"image_url": "https://peterssendreceiveapp.ngrok.io/img/white-t-shirt.png",
-                    "subtitle": "Exercise that targets your chest.",
-                    // "default_action": {
-                    //     "type": "web_url",
-                    //     "url": "https://peterssendreceiveapp.ngrok.io/view?item=100",
-                    //     "messenger_extensions": true,
-                    //     "webview_height_ratio": "tall",
-                    //     "fallback_url": "https://peterssendreceiveapp.ngrok.io/"
-                    // },
-                    "buttons": [{
-                        "title": "Select",
-                        "type": "web_url",
-                        "url": "http://www.bodybuilding.com/content/10-best-chest-exercises-for-building-muscle.html",
-                        "messenger_extensions": true,
-                        "webview_height_ratio": "tall",
-                        "fallback_url": "https://www.bodybuilding.com/"
+                    title: "Chest Day",
+                    subtitle: "Exercise that targets your chest.",
+                    buttons: [{
+                        title: "Select",
+                        type: "web_url",
+                        url: "http://www.bodybuilding.com/content/10-best-chest-exercises-for-building-muscle.html",
+                        messenger_extensions: true,
+                        webview_height_ratio: "tall",
+                        fallback_url: "https://www.bodybuilding.com/"
                     }]
                 }, {
-                    "title": "Back Day",
-                    //"image_url": "https://peterssendreceiveapp.ngrok.io/img/blue-t-shirt.png",
-                    "subtitle": "Exercise that targets your back",
-                    // "default_action": {
-                    //     "type": "web_url",
-                    //     "url": "https://peterssendreceiveapp.ngrok.io/view?item=101",
-                    //     "messenger_extensions": true,
-                    //     "webview_height_ratio": "tall",
-                    //     "fallback_url": "https://peterssendreceiveapp.ngrok.io/"
-                    // },
-                    "buttons": [{
-                        "title": "Select",
-                        "type": "web_url",
-                        "url": "http://www.bodybuilding.com/content/10-best-muscle-building-back-exercises.html",
-                        "messenger_extensions": true,
-                        "webview_height_ratio": "tall",
-                        "fallback_url": "https://www.bodybuilding.com/"
+                    title: "Back Day",
+                    subtitle: "Exercise that targets your back",
+                    buttons: [{
+                        title: "Select",
+                        type: "web_url",
+                        url: "http://www.bodybuilding.com/content/10-best-muscle-building-back-exercises.html",
+                        messenger_extensions: true,
+                        webview_height_ratio: "tall",
+                        fallback_url: "https://www.bodybuilding.com/"
                     }]
                 }, {
-                    "title": "Leg Day",
-                    //"image_url": "http://www.bodybuilding.com/content/5-leg-workouts-for-mass-a-beginners-guide.html",
-                    "subtitle": "100% Cotton, 200% Comfortable",
-                    // "default_action": {
-                    //     "type": "web_url",
-                    //     "url": "https://peterssendreceiveapp.ngrok.io/view?item=102",
-                    //     "messenger_extensions": true,
-                    //     "webview_height_ratio": "tall",
-                    //     "fallback_url": "https://peterssendreceiveapp.ngrok.io/"
-                    // },
-                    "buttons": [{
-                        "title": "Select",
-                        "type": "web_url",
-                        "url": "http://www.bodybuilding.com/content/5-leg-workouts-for-mass-a-beginners-guide.html",
-                        "messenger_extensions": true,
-                        "webview_height_ratio": "tall",
-                        "fallback_url": "https://www.bodybuilding.com/"
+                    title: "Leg Day",
+                    subtitle: "100% Cotton, 200% Comfortable",
+                    buttons: [{
+                        title: "Select",
+                        type: "web_url",
+                        url: "http://www.bodybuilding.com/content/5-leg-workouts-for-mass-a-beginners-guide.html",
+                        messenger_extensions: true,
+                        webview_height_ratio: "tall",
+                        fallback_url: "https://www.bodybuilding.com/"
                     }]
                  }]
-                //,
-                // "buttons": [{
-                //     "title": "View More",
-                //     "type": "postback",
-                //     "payload": "payload"
-                // }]
+
             }
         }
     }
