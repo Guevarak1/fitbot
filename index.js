@@ -100,7 +100,7 @@ function sendImageMessage(sender) {
 }
 
 function sendGenericMessage(sender) {
-    let messageDate = {
+    let messageData = {
         "attachment": {
             "type": "template",
             "payload": {
