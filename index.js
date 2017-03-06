@@ -207,6 +207,7 @@ function sendGenericMessage(sender) {
 
 function sendRequest(sender, messageData) {
 
+	console.log("message data: " + messageData)
     request({
         url: "https://graph.facebook.com/v2.6/me/messages",
         qs: { access_token: token },
@@ -219,7 +220,7 @@ function sendRequest(sender, messageData) {
         if (error) {
             console.log("sending error")
         } else if (response.body.error) {
-            console.log("response body error")
+            console.log("response body error: \n" + "message: " + error.message + "\n" + "type: " +  error.type)
         }
     })
 }
