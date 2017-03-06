@@ -206,8 +206,8 @@ function sendGenericMessage(sender) {
 }
 
 function sendRequest(sender, messageData) {
-
-	console.log("message data: " + messageData)
+	console.log("========================send Request Hit ==============================================")
+	console.log("message data: " + messageData.text)
     request({
         url: "https://graph.facebook.com/v2.6/me/messages",
         qs: { access_token: token },
