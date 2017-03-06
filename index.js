@@ -73,139 +73,32 @@ function decideMessage(sender, text1) {
 
 function sendMuscleGroupMessage(sender, text) {
 
-    let messageData = {
-        "attachment": {
-            "type": "template",
-            "payload": {
-                "template_type": "list",
-                "top_element_style": "compact",
-                "elements": [{
-                    "title": "Classic White T-Shirt",
-                    //"image_url": "https://peterssendreceiveapp.ngrok.io/img/white-t-shirt.png",
-                    "subtitle": "100% Cotton, 200% Comfortable",
-                    "default_action": {
-                        "type": "web_url",
-                        "url": "https://www.google.com",
-                        "messenger_extensions": true,
-                        "webview_height_ratio": "tall",
-                        "fallback_url": "https://www.google.com"
-                    }
+    var messageData = 
+    {
+        attachment: {
+            type: "template",
+            payload: {
+                template_type: "list",
+               "top_element_style": "compact",
+                elements: [{
+                    title: "Muscle Groups",
+                    //image_url: "http://vignette2.wikia.nocookie.net/humongous/images/f/f8/Barbell.png/revision/latest?cb=20160404211047",
+                    subtitle: "Choose a muscle group for todays workout"
                 }, {
-                    "title": "Classic Blue T-Shirt",
-                    //"image_url": "https://peterssendreceiveapp.ngrok.io/img/blue-t-shirt.png",
-                    "subtitle": "100% Cotton, 200% Comfortable",
-                    "default_action": {
-                        "type": "web_url",
-                        "url": "https://www.google.com",
-                        "messenger_extensions": true,
-                        "webview_height_ratio": "tall",
-                        "fallback_url": "https://www.google.com"
-                    }
-                    // "buttons": [{
-                    //     "title": "Buy",
-                    //     "type": "web_url",
-                    //     "url": "https://www.google.com",
-                    //     "messenger_extensions": true,
-                    //     "webview_height_ratio": "tall",
-                    //     "fallback_url": "https://www.google.com"
-                    // }]
-                }, {
-                    "title": "Classic Black T-Shirt",
-                    //"image_url": "https://peterssendreceiveapp.ngrok.io/img/black-t-shirt.png",
-                    "subtitle": "100% Cotton, 200% Comfortable",
-                    "default_action": {
-                        "type": "web_url",
-                        "url": "https://www.google.com",
-                        "messenger_extensions": true,
-                        "webview_height_ratio": "tall",
-                        "fallback_url": "https://www.google.com"
-                    }
-                    // "buttons": [{
-                    //     "title": "Buy",
-                    //     "type": "web_url",
-                    //     "url": "https://peterssendreceiveapp.ngrok.io/shop?item=102",
-                    //     "messenger_extensions": true,
-                    //     "webview_height_ratio": "tall",
-                    //     "fallback_url": "https://peterssendreceiveapp.ngrok.io/"
-                    // }]
-                }, {
-                    "title": "Classic Gray T-Shirt",
-                    //"image_url": "https://peterssendreceiveapp.ngrok.io/img/gray-t-shirt.png",
-                    "subtitle": "100% Cotton, 200% Comfortable",
-                    "default_action": {
-                        "type": "web_url",
-                        "url": "https://www.google.com",
-                        "messenger_extensions": true,
-                        "webview_height_ratio": "tall",
-                        "fallback_url": "https://www.google.com"
-                    }
-                    // "buttons": [{
-                    //     "title": "Buy",
-                    //     "type": "web_url",
-                    //     "url": "https://peterssendreceiveapp.ngrok.io/shop?item=103",
-                    //     "messenger_extensions": true,
-                    //     "webview_height_ratio": "tall",
-                    //     "fallback_url": "https://peterssendreceiveapp.ngrok.io/"
-                    // }]
-                }],
-                "buttons": [{
-                    "title": "View More",
-                    "type": "postback",
-                    "payload": "payload"
+                    title: "Chest Day",
+                    subtitle: "Exercise that targets your chest.",
+                    buttons: [{
+                        title: "Select",
+                        type: "web_url",
+                        url: "http://www.bodybuilding.com/content/10-best-chest-exercises-for-building-muscle.html",
+                        messenger_extensions: true,
+                        webview_height_ratio: "tall",
+                        fallback_url: "https://www.bodybuilding.com/"
+                    }]
                 }]
             }
         }
     }
-
-
-    // {
-    //     attachment: {
-    //         type: "template",
-    //         payload: {
-    //             template_type: "list",
-    //            "top_element_style": "compact",
-    //             elements: [{
-    //                 title: "Muscle Groups",
-    //                 //image_url: "http://vignette2.wikia.nocookie.net/humongous/images/f/f8/Barbell.png/revision/latest?cb=20160404211047",
-    //                 subtitle: "Choose a muscle group for todays workout"
-    //             }, {
-    //                 title: "Chest Day",
-    //                 subtitle: "Exercise that targets your chest.",
-    //                 buttons: [{
-    //                     title: "Select",
-    //                     type: "web_url",
-    //                     url: "http://www.bodybuilding.com/content/10-best-chest-exercises-for-building-muscle.html",
-    //                     messenger_extensions: true,
-    //                     webview_height_ratio: "tall",
-    //                     fallback_url: "https://www.bodybuilding.com/"
-    //                 }]
-    //             }, {
-    //                 title: "Back Day",
-    //                 subtitle: "Exercise that targets your back",
-    //                 buttons: [{
-    //                     title: "Select",
-    //                     type: "web_url",
-    //                     url: "http://www.bodybuilding.com/content/10-best-muscle-building-back-exercises.html",
-    //                     messenger_extensions: true,
-    //                     webview_height_ratio: "tall",
-    //                     fallback_url: "https://www.bodybuilding.com/"
-    //                 }]
-    //             }, {
-    //                 title: "Leg Day",
-    //                 subtitle: "100% Cotton, 200% Comfortable",
-    //                 buttons: [{
-    //                     title: "Select",
-    //                     type: "web_url",
-    //                     url: "http://www.bodybuilding.com/content/5-leg-workouts-for-mass-a-beginners-guide.html",
-    //                     messenger_extensions: true,
-    //                     webview_height_ratio: "tall",
-    //                     fallback_url: "https://www.bodybuilding.com/"
-    //                 }]
-    //              }]
-
-    //         }
-    //     }
-    // }
     sendRequest(sender, messageData)
 }
 
