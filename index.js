@@ -220,7 +220,7 @@ function sendRequest(sender, messageData) {
         if (error) {
             console.log("sending error")
         } else if (response.body.error) {
-            console.log("response body error: \n" + "message: " + error.message + "\n" + "type: " +  error.type)
+            console.log("response body error: \n" +  "error: " + error + "\nresponse: " + response)
         }
     })
 }
