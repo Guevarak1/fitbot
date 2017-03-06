@@ -71,7 +71,7 @@ function decideMessage(sender, text1) {
     }
 }
 
-function sendMuscleGroupMessage(sender, text) {
+function sendMuscleGroupMessage(sender) {
 
     var messageData = 
     {
