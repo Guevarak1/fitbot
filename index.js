@@ -89,7 +89,7 @@ function sendMuscleGroupMessage(sender, text) {
                         "messenger_extensions": true,
                         "webview_height_ratio": "tall",
                         "fallback_url": "https://www.google.com"
-                    },
+                    }
                 }, {
                     "title": "Classic Blue T-Shirt",
                     //"image_url": "https://peterssendreceiveapp.ngrok.io/img/blue-t-shirt.png",
@@ -100,7 +100,7 @@ function sendMuscleGroupMessage(sender, text) {
                         "messenger_extensions": true,
                         "webview_height_ratio": "tall",
                         "fallback_url": "https://www.google.com"
-                    },
+                    }
                     // "buttons": [{
                     //     "title": "Buy",
                     //     "type": "web_url",
@@ -119,7 +119,7 @@ function sendMuscleGroupMessage(sender, text) {
                         "messenger_extensions": true,
                         "webview_height_ratio": "tall",
                         "fallback_url": "https://www.google.com"
-                    },
+                    }
                     // "buttons": [{
                     //     "title": "Buy",
                     //     "type": "web_url",
@@ -138,7 +138,7 @@ function sendMuscleGroupMessage(sender, text) {
                         "messenger_extensions": true,
                         "webview_height_ratio": "tall",
                         "fallback_url": "https://www.google.com"
-                    },
+                    }
                     // "buttons": [{
                     //     "title": "Buy",
                     //     "type": "web_url",
