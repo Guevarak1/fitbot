@@ -65,35 +65,41 @@ function decideMessage(sender, text1) {
 
         //give user a list of default muscle groups to choose from
     } else {
-        sendText(sender, "Welcome to the Fitbot! Which muscle group are you working out today?");
-        //sendButtonMessage(sender, "What is your favorite season");
+        //sendText(sender, "Welcome to the Fitbot! Which muscle group are you working out today?");
         sendMuscleGroupMessage(sender)
     }
 }
 
 function sendMuscleGroupMessage(sender) {
 
-    var messageData = 
-    {
-        attachment: {
-            type: "template",
-            payload: {
-                template_type: "list",
-               "top_element_style": "compact",
-                elements: [{
-                    title: "Muscle Groups",
-                    //image_url: "http://vignette2.wikia.nocookie.net/humongous/images/f/f8/Barbell.png/revision/latest?cb=20160404211047",
-                    subtitle: "Choose a muscle group for todays workout"
-                }, {
-                    title: "Chest Day",
-                    subtitle: "Exercise that targets your chest.",
-                    buttons: [{
-                        title: "Select",
-                        type: "web_url",
-                        url: "http://www.bodybuilding.com/content/10-best-chest-exercises-for-building-muscle.html",
-                        messenger_extensions: true,
-                        webview_height_ratio: "tall",
-                        fallback_url: "https://www.bodybuilding.com/"
+    var messageData = {
+        "attachment": {
+            "type": "template",
+            "payload": {
+                "template_type": "generic",
+                "elements": [{
+                    "title": "Welcome to Fitbot!",
+                    "image_url": "https://digitalgymbuddy.files.wordpress.com/2015/03/cropped-generic-gym.jpg",
+                    "subtitle": "What would you be working out today?",
+                    "default_action": {
+                        "type": "web_url",
+                        "url": "https://www.bodybuilding.com/",
+                        "messenger_extensions": true,
+                        "webview_height_ratio": "tall",
+                        "fallback_url": "https://www.bodybuilding.com/"
+                    },
+                    "buttons": [{
+                        "title": "Chest",
+                        "type": "postback",
+                        "payload": "chest"
+                    }, {
+                        "title": "Back",
+                        "type": "postback",
+                        "payload": "back"
+                    }, {
+                        "title": "Legs",
+                        "type": "postback",
+                        "payload": "legs"
                     }]
                 }]
             }
