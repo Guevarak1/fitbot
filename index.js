@@ -71,8 +71,8 @@ function decideMessage(sender, text1) {
 }
 
 function sendMuscleGroupMessage(sender) {
-
-    var messageData = {
+	console.log("======================sendMuscleGroupMessage request start=======================");
+    let messageData = {
         "attachment": {
             "type": "template",
             "payload": {
