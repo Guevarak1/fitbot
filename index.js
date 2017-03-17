@@ -17,9 +17,7 @@ app.get('/', function (req, res) {
 	res.send('Hello world');
 });
 
-app.listen(5000, function () {
-	console.log('Listening on port 5000');
-});
+app.listen(process.env.PORT || 5000)
 
 // respond to facebook's verification
 app.get('/webhook', function(req, res) {
