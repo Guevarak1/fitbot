@@ -9,49 +9,49 @@ var request = require('request');
 app.set('port', (process.env.PORT || 5000))
 
 app.use(bodyParser.urlencoded({
-    extended: true
+	extended: true
 }));
 app.use(bodyParser.json());
 
 app.get('/', function(req, res) {
-    res.send('Hello world');
+	res.send('Hello world');
 });
 
 app.listen(process.env.PORT || 5000)
 
 // respond to facebook's verification
 app.get('/webhook', function(req, res) {
-    if (req.query['hub.mode'] === 'subscribe' &&
-        req.query['hub.verify_token'] === VERIFY_TOKEN) {
-        console.log("Validating webhook");
-        res.status(200).send(req.query['hub.challenge']);
-    } else {
-        console.error("Failed validation. Make sure the validation tokens match.");
-        res.sendStatus(403);
-    }
+	if (req.query['hub.mode'] === 'subscribe' &&
+		req.query['hub.verify_token'] === VERIFY_TOKEN) {
+		console.log("Validating webhook");
+	res.status(200).send(req.query['hub.challenge']);
+} else {
+	console.error("Failed validation. Make sure the validation tokens match.");
+	res.sendStatus(403);
+}
 });
 
 // respond to post calls from facebook
 app.post('/webhook/', function(req, res) {
-    var data = req.body;
+	var data = req.body;
 
     // Make sure this is a page subscription
     if (data.object === 'page') {
 
         // Iterate over each entry - there may be multiple if batched
         data.entry.forEach(function(entry) {
-            var pageID = entry.id;
-            var timeOfEvent = entry.time;
+        	var pageID = entry.id;
+        	var timeOfEvent = entry.time;
 
             // Iterate over each messaging event
             entry.messaging.forEach(function(event) {
-                if (event.message) {
-                    receivedMessage(event);
-                } else if (event.postback) {
-                    receivedPostback(event)
-                } else {
-                    console.log("Webhook received unknown event: ", event);
-                }
+            	if (event.message) {
+            		receivedMessage(event);
+            	} else if (event.postback) {
+            		receivedPostback(event)
+            	} else {
+            		console.log("Webhook received unknown event: ", event);
+            	}
             });
         });
 
@@ -65,118 +65,162 @@ app.post('/webhook/', function(req, res) {
 });
 
 function receivedMessage(event) {
-    var senderID = event.sender.id;
-    var recipientID = event.recipient.id;
-    var timeOfMessage = event.timestamp;
-    var message = event.message;
+	var senderID = event.sender.id;
+	var recipientID = event.recipient.id;
+	var timeOfMessage = event.timestamp;
+	var message = event.message;
 
-    console.log("Received message for user %d and page %d at %d with message:",
-        senderID, recipientID, timeOfMessage);
-    console.log(JSON.stringify(message));
+	console.log("Received message for user %d and page %d at %d with message:",
+		senderID, recipientID, timeOfMessage);
+	console.log(JSON.stringify(message));
 
-    var messageId = message.mid;
+	var messageId = message.mid;
 
-    var messageText = message.text;
-    var messageAttachments = message.attachments;
+	var messageText = message.text;
+	var messageAttachments = message.attachments;
 
-    if (messageText) {
+	if (messageText) {
 
         // If we receive a text message, check to see if it matches a keyword
         // and send back the example. Otherwise, just echo the text we received.
         switch (messageText) {
-            case 'button':
-                sendButtonMessage(senderID);
-                break;
-            default:
-                sendTextMessage(senderID, messageText);
+        	case 'button':
+        	sendButtonMessage(senderID);
+        	break;
+        	default:
+        	sendTextMessage(senderID, messageText);
         }
     } else if (messageAttachments) {
-        sendTextMessage(senderID, "Message with attachment received");
+    	sendTextMessage(senderID, "Message with attachment received");
     }
 }
 
 function receivedPostback(event) {
-    var senderID = event.sender.id;
-    var recipientID = event.recipient.id;
-    var timeOfMessage = event.timestamp;
+	var senderID = event.sender.id;
+	var recipientID = event.recipient.id;
+	var timeOfMessage = event.timestamp;
 
-    var payload = event.postback.payload;
+	var payload = event.postback.payload;
 
-    console.log("Received message for user %d and page %d at %d with message:",
-        senderID, recipientID, timeOfMessage);
-    console.log(JSON.stringify(payload));
+	console.log("Received message for user %d and page %d at %d with message:",
+		senderID, recipientID, timeOfMessage);
+	console.log(JSON.stringify(payload));
 
-    if (payload) {
+	if (payload) {
 
-        switch (payload) {
-            case 'USER_DEFINED_PAYLOAD':
-                sendTextMessage(senderID, 'hit payload');
-                break;
-            default:
-                sendTextMessage(senderID, payload);
-        }
-    }
+		switch (payload) {
+			case 'USER_DEFINED_PAYLOAD':
+			sendTextMessage(senderID, 'hit payload');
+			break;
+			case 'DEVELOPER_DEFINED_PAYLOAD':
+			sendTextMessage(senderID, 'hit generic payload');
+			break;
+			default:
+			sendTextMessage(senderID, payload);
+		}
+	}
 }
 
 function sendTextMessage(recipientId, messageText) {
-    var messageData = {
-        recipient: {
-            id: recipientId
-        },
-        message: {
-            text: messageText
-        }
-    };
+	var messageData = {
+		recipient: {
+			id: recipientId
+		},
+		message: {
+			text: messageText
+		}
+	};
 
-    callSendAPI(messageData);
+	callSendAPI(messageData);
 }
 
 function sendButtonMessage(recipientId) {
-    var messageData = {
-        recipient: {
-            id: recipientId
-        },
-        message: {
-            attachment: {
-                type: "template",
-                payload: {
-                    template_type: "button",
-                    text: "What do you want to do next?",
-                    buttons: [{
-                        type: "web_url",
-                        url: "https://google.com",
-                        title: "Show Website"
-                    }, {
-                        type: "postback",
-                        title: "Start Chatting",
-                        payload: "USER_DEFINED_PAYLOAD"
-                    }]
-                }
-            }
-        }
-    };
+	var messageData = {
+		recipient: {
+			id: recipientId
+		},
+		message: {
+			attachment: {
+				type: "template",
+				payload: {
+					template_type: "button",
+					text: "What do you want to do next?",
+					buttons: [{
+						type: "web_url",
+						url: "https://google.com",
+						title: "Show Website"
+					}, {
+						type: "postback",
+						title: "Start Chatting",
+						payload: "USER_DEFINED_PAYLOAD"
+					}]
+				}
+			}
+		}
+	};
+	callSendAPI(messageData);
+}
 
-    callSendAPI(messageData);
+function sendGenericMessage(recipientId){
+	var messageData = {
+		recipient: {
+			id: recipientId
+		},
+		message: {
+			attachment:{
+				type:"template",
+				payload:{
+					template_type:"generic",
+					elements:[
+					{
+						title:"Generic Message with buttons",
+						image_url:"http://i.imgur.com/nEIuGxy.png",
+						subtitle:"We\'ve got the right hat for everyone.",
+						default_action: {
+							type: "web_url",
+							url: "http://i.imgur.com/nEIuGxy.png",
+							messenger_extensions: true,
+							webview_height_ratio: "tall",
+							fallback_url: "http://imgur.com"
+						},
+						buttons:[
+						{
+							type:"web_url",
+							url:"http://imgur.com",
+							title:"View Website"
+						},{
+							type:"postback",
+							title:"Start Chatting",
+							payload:"DEVELOPER_DEFINED_PAYLOAD"
+						}              
+						]      
+					}
+					]
+				}
+			}       
+		}
+	};
+	callSendAPI(messageData);
 }
 
 function callSendAPI(messageData) {
-    request({
-        uri: 'https://graph.facebook.com/v2.6/me/messages',
-        qs: { access_token: PAGE_ACCESS_TOKEN },
-        method: 'POST',
-        json: messageData
+	request({
+		uri: 'https://graph.facebook.com/v2.6/me/messages',
+		qs: { access_token: PAGE_ACCESS_TOKEN },
+		method: 'POST',
+		json: messageData
 
-    }, function(error, response, body) {
-        if (!error && response.statusCode == 200) {
-            var recipientId = body.recipient_id;
-            var messageId = body.message_id;
+	}, function(error, response, body) {
+		if (!error && response.statusCode == 200) {
+			var recipientId = body.recipient_id;
+			var messageId = body.message_id;
 
-            console.log("Successfully sent generic message with id %s to recipient %s",
-                messageId, recipientId);
-        } else {
-            console.error("Unable to send message.");
-            console.error(response);
-            console.error(error);
-        }
-    });
+			console.log("Successfully sent generic message with id %s to recipient %s",
+				messageId, recipientId);
+		} else {
+			console.error("Unable to send message.");
+			console.error(response);
+			console.error(error);
+		}
+	});
 }
