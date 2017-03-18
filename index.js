@@ -212,7 +212,7 @@ function sendListMessage(recipientId){
 					elements: [
 					{
 						title: "Classic T-Shirt Collection",
-						image_url: "https://http://i.imgur.com/jZstPeW.jpg",
+						image_url: "https://i.imgur.com/jZstPeW.jpg",
 						subtitle: "See all our colors",
 						buttons: [
 						{
