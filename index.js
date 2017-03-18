@@ -87,6 +87,9 @@ function receivedMessage(event) {
         	case 'button':
         	sendButtonMessage(senderID);
         	break;
+        	case 'generic':
+        	sendGenericMessage(senderID);
+        	break;
         	default:
         	sendTextMessage(senderID, messageText);
         }
