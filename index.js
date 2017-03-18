@@ -179,13 +179,13 @@ function sendGenericMessage(recipientId){
 						title:"Generic Message with buttons",
 						image_url:"https://google.com",
 						subtitle:"We\'ve got the right hat for everyone.",
-						default_action: {
-							type: "web_url",
-							url: "https://google.com",
-							messenger_extensions: false,
-							webview_height_ratio: "tall",
-							fallback_url: "https://google.com"
-						},
+						// default_action: {
+						// 	type: "web_url",
+						// 	url: "https://google.com",
+						// 	messenger_extensions: false,
+						// 	webview_height_ratio: "tall",
+						// 	fallback_url: "https://google.com"
+						// },
 						buttons: [{
 							type: "web_url",
 							url: "https://google.com",
