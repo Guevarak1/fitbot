@@ -189,7 +189,7 @@ function sendGenericMessage(recipientId){
 						buttons:[
 						{
 							type:"web_url",
-							url:"https://imgur.com",
+							url:"https://i.imgur.com/nEIuGxy.png",
 							title:"View Website"
 						},{
 							type:"postback",
