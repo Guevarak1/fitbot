@@ -47,10 +47,9 @@ app.post('/webhook/', function(req, res) {
             entry.messaging.forEach(function(event) {
                 if (event.message) {
                     receivedMessage(event);
-                }else if(event.postback){
-					receivedMessage(event)                	
-                } 
-                else {
+                } else if (event.postback) {
+                    receivedPostback(event)
+                } else {
                     console.log("Webhook received unknown event: ", event);
                 }
             });
@@ -88,15 +87,35 @@ function receivedMessage(event) {
             case 'button':
                 sendButtonMessage(senderID);
                 break;
-            case 'USER_DEFINED_PAYLOAD':
-                sendTextMessage(senderID, 'hit payload');
-                break;
             default:
                 sendTextMessage(senderID, messageText);
         }
     } else if (messageAttachments) {
         sendTextMessage(senderID, "Message with attachment received");
-    } 
+    }
+}
+
+function receivedPostback(event) {
+    var senderID = event.sender.id;
+    var recipientID = event.recipient.id;
+    var timeOfMessage = event.timestamp;
+
+    var payload = event.postback.payload;
+
+    console.log("Received message for user %d and page %d at %d with message:",
+        senderID, recipientID, timeOfMessage);
+    console.log(JSON.stringify(payload));
+
+    if (payload) {
+
+        switch (payload) {
+            case 'USER_DEFINED_PAYLOAD':
+                sendTextMessage(senderID, 'hit payload');
+                break;
+            default:
+                sendTextMessage(senderID, payload);
+        }
+    }
 }
 
 function sendTextMessage(recipientId, messageText) {
