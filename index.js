@@ -177,19 +177,19 @@ function sendGenericMessage(recipientId){
 					elements:[
 					{
 						title:"Generic Message with buttons",
-						image_url:"https://i.imgur.com/nEIuGxy.png",
+						image_url:"https://google.com",
 						subtitle:"We\'ve got the right hat for everyone.",
 						default_action: {
 							type: "web_url",
-							url: "https://i.imgur.com/nEIuGxy.png",
+							url: "https://google.com",
 							messenger_extensions: false,
 							webview_height_ratio: "tall",
-							fallback_url: "https://imgur.com"
+							fallback_url: "https://google.com"
 						},
 						buttons:[
 						{
 							type:"web_url",
-							url:"https://i.imgur.com/nEIuGxy.png",
+							url:"https://google.com",
 							title:"View Website"
 						},{
 							type:"postback",
