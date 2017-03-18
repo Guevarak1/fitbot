@@ -93,6 +93,7 @@ function receivedMessage(event) {
             	sendTextMessage(senderID, "Message with attachment received");
             }
         }
+
         function sendTextMessage(recipientId, messageText) {
         	var messageData = {
         		recipient: {
@@ -100,6 +101,37 @@ function receivedMessage(event) {
         		},
         		message: {
         			text: messageText
+        		}
+        	};
+
+        	callSendAPI(messageData);
+        }
+
+        function sendGenericMessage(recipientId){
+        	var messageData = {
+        		recipient: {
+        			id: recipientId
+        		},
+        		message: {
+        			attachment:{
+        				type:"template",
+        				payload:{
+        					template_type:"button",
+        					text:"What do you want to do next?",
+        					buttons:[
+        					{
+        						type:"web_url",
+        						url:"https://google.com",
+        						title:"Show Website"
+        					},
+        					{
+        						type:"postback",
+        						title:"Start Chatting",
+        						payload:"USER_DEFINED_PAYLOAD"
+        					}
+        					]
+        				}
+        			}
         		}
         	};
 
