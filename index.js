@@ -186,19 +186,16 @@ function sendGenericMessage(recipientId){
 							webview_height_ratio: "tall",
 							fallback_url: "https://google.com"
 						},
-						buttons:[
-						{
-							type:"web_url",
-							url:"https://google.com",
-							title:"View Website"
-						},{
-							type:"postback",
-							title:"Start Chatting",
-							payload:"DEVELOPER_DEFINED_PAYLOAD"
-						}              
-						]      
-					}
-					]
+						buttons: [{
+							type: "web_url",
+							url: "https://google.com",
+							title: "Show Website"
+						}, {
+							type: "postback",
+							title: "Start Chatting",
+							payload: "DEVELOPER_DEFINED_PAYLOAD"
+						}]      
+					}]
 				}
 			}       
 		}
