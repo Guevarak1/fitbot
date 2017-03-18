@@ -90,6 +90,9 @@ function receivedMessage(event) {
         	case 'generic':
         	sendGenericMessage(senderID);
         	break;
+        	case 'list':
+        	sendListMessage(senderID);
+        	break;
         	default:
         	sendTextMessage(senderID, messageText);
         }
@@ -179,13 +182,6 @@ function sendGenericMessage(recipientId){
 						title:"Generic Message with buttons",
 						image_url:"https://google.com",
 						subtitle:"We\'ve got the right hat for everyone.",
-						// default_action: {
-						// 	type: "web_url",
-						// 	url: "https://google.com",
-						// 	messenger_extensions: false,
-						// 	webview_height_ratio: "tall",
-						// 	fallback_url: "https://google.com"
-						// },
 						buttons: [{
 							type: "web_url",
 							url: "https://google.com",
@@ -198,6 +194,80 @@ function sendGenericMessage(recipientId){
 					}]
 				}
 			}       
+		}
+	};
+	callSendAPI(messageData);
+}
+
+function sendListMessage(recipientId){
+	var messageData = {
+		recipient: {
+			id: recipientId
+		},
+		message: {
+			attachment: {
+				type: "template",
+				payload: {
+					template_type: "list",
+					elements: [
+					{
+						title: "Classic T-Shirt Collection",
+						image_url: "https://http://i.imgur.com/jZstPeW.jpg",
+						subtitle: "See all our colors",
+						buttons: [
+						{
+							title: "View",
+							type: "web_url",
+							url: "https://google.com",
+						}
+						]
+					},
+					{
+						title: "Classic White T-Shirt",
+						// image_url: "https://peterssendreceiveapp.ngrok.io/img/white-t-shirt.png",
+						subtitle: "100% Cotton, 200% Comfortable",
+						buttons: [
+						{
+							title: "Shop Now",
+							type: "web_url",
+							url: "https://google.com",
+						}
+						]                
+					},
+					{
+						title: "Classic Blue T-Shirt",
+						// "image_url": "https://peterssendreceiveapp.ngrok.io/img/blue-t-shirt.png",
+						subtitle: "100% Cotton, 200% Comfortable",
+						buttons: [
+						{
+							title: "Shop Now",
+							type: "web_url",
+							url: "https://google.com",
+						}
+						]                
+					},
+					{
+						title: "Classic Black T-Shirt",
+						// "image_url": "https://peterssendreceiveapp.ngrok.io/img/black-t-shirt.png",
+						subtitle: "100% Cotton, 200% Comfortable",
+						buttons: [
+						{
+							title: "Shop Now",
+							type: "web_url",
+							url: "https://google.com",
+						}
+						]                
+					}
+					],
+					buttons: [
+					{
+						title: "View More",
+						type: "postback",
+						payload: "payload"                        
+					}
+					]  
+				}
+			}
 		}
 	};
 	callSendAPI(messageData);
