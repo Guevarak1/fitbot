@@ -182,7 +182,7 @@ function sendGenericMessage(recipientId){
 						default_action: {
 							type: "web_url",
 							url: "https://i.imgur.com/nEIuGxy.png",
-							messenger_extensions: true,
+							messenger_extensions: false,
 							webview_height_ratio: "tall",
 							fallback_url: "https://imgur.com"
 						},
