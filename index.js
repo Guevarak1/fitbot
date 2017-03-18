@@ -82,8 +82,11 @@ function receivedMessage(event) {
                 // If we receive a text message, check to see if it matches a keyword
                 // and send back the example. Otherwise, just echo the text we received.
                 switch (messageText) {
-                	case 'generic':
-                	sendGenericMessage(senderID);
+                	case 'button':
+                	sendButtonMessage(senderID);
+                	break;
+                	case 'USER_DEFINED_PAYLOAD':
+                	sendTextMessage(senderID, 'hit payload');
                 	break;
 
                 	default:
@@ -107,7 +110,7 @@ function receivedMessage(event) {
         	callSendAPI(messageData);
         }
 
-        function sendGenericMessage(recipientId){
+        function sendButtonMessage(recipientId){
         	var messageData = {
         		recipient: {
         			id: recipientId
