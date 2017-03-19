@@ -100,6 +100,7 @@ function receivedMessage(event) {
         	case 'quick':
         	sendQuickRepliesMessage(senderID);
         	break;
+
         	default:
         	sendTextMessage(senderID, messageText);
         }
@@ -136,6 +137,9 @@ function receivedPostback(event) {
 			break;
 			case 'DEVELOPER_DEFINED_PAYLOAD_FOR_PICKING_BACK':
 			sendTextMessage(senderID, 'hit back payload');
+			break;
+			case 'DEVELOPER_DEFINED_PAYLOAD_FOR_PICKING_SHOULDERS':
+			sendTextMessage(senderID, 'hit shoulders payload');
 			break;
 			case 'GET_STARTED_PAYLOAD':
 			sendTextMessage(senderID, 'Hi ,I\'m Fitbot ,and I was created to help you choose exercises.');
