@@ -179,8 +179,8 @@ function sendGenericMessage(recipientId){
 					template_type:"generic",
 					elements:[
 					{
-						title:"Generic Message with buttons",
-						image_url:"https://google.com",
+						title:"exercise 1",
+						image_url:"https://cdn-maf1.heartyhosting.com/sites/muscleandfitness.com/files/styles/full_node_image_1090x614/public/media/dumbbells-on-floor.jpg?itok=YyIzb6d3",
 						subtitle:"We\'ve got the right hat for everyone.",
 						buttons: [{
 							type: "web_url",
@@ -197,7 +197,48 @@ function sendGenericMessage(recipientId){
 							title: "Start Chatting",
 							payload: "DEVELOPER_DEFINED_PAYLOAD"
 						}]      
-					}]
+					},
+					{
+						title:"exercise ",
+						image_url:"https://cdn-maf1.heartyhosting.com/sites/muscleandfitness.com/files/styles/full_node_image_1090x614/public/media/dumbbells-on-floor.jpg?itok=YyIzb6d3",
+						subtitle:"We\'ve got the right hat for everyone.",
+						buttons: [{
+							type: "web_url",
+							url: "https://google.com",
+							title: "Show Website"
+						},
+						{
+							type: "web_url",
+							url: "https://google.com",
+							title: "Show Website again"
+						},
+						{
+							type: "postback",
+							title: "Start Chatting",
+							payload: "DEVELOPER_DEFINED_PAYLOAD"
+						}]      
+					},
+					{
+						title:"exercise ",
+						image_url:"https://cdn-maf1.heartyhosting.com/sites/muscleandfitness.com/files/styles/full_node_image_1090x614/public/media/dumbbells-on-floor.jpg?itok=YyIzb6d3",
+						subtitle:"We\'ve got the right hat for everyone.",
+						buttons: [{
+							type: "web_url",
+							url: "https://google.com",
+							title: "Show Website"
+						},
+						{
+							type: "web_url",
+							url: "https://google.com",
+							title: "Show Website again"
+						},
+						{
+							type: "postback",
+							title: "Start Chatting",
+							payload: "DEVELOPER_DEFINED_PAYLOAD"
+						}]      
+					}
+					]
 				}
 			}       
 		}
