@@ -7,17 +7,21 @@ var bodyParser = require('body-parser');
 var request = require('request');
 
 app.set('port', (process.env.PORT || 5000))
+app.listen(process.env.PORT || 5000)
 
 app.use(bodyParser.urlencoded({
 	extended: true
 }));
+
 app.use(bodyParser.json());
 
 app.get('/', function(req, res) {
 	res.send('Hello world');
 });
 
-app.listen(process.env.PORT || 5000)
+app.get('/setup',function(req,res){
+	getStarted(res);
+});
 
 // respond to facebook's verification
 app.get('/webhook', function(req, res) {
@@ -121,6 +125,9 @@ function receivedPostback(event) {
 			case 'DEVELOPER_DEFINED_PAYLOAD':
 			sendTextMessage(senderID, 'hit generic payload');
 			break;
+			case 'GET_STARTED_PAYLOAD':
+			sendTextMessage(senderID, 'Hi ,I\'m Fitbot ,and I was created to help you choose exercises.');
+			break;
 			default:
 			sendTextMessage(senderID, payload);
 		}
@@ -199,7 +206,7 @@ function sendGenericMessage(recipientId){
 						}]      
 					},
 					{
-						title:"exercise ",
+						title:"exercise 2",
 						image_url:"https://cdn-maf1.heartyhosting.com/sites/muscleandfitness.com/files/styles/full_node_image_1090x614/public/media/dumbbells-on-floor.jpg?itok=YyIzb6d3",
 						subtitle:"We\'ve got the right hat for everyone.",
 						buttons: [{
@@ -219,7 +226,7 @@ function sendGenericMessage(recipientId){
 						}]      
 					},
 					{
-						title:"exercise ",
+						title:"exercise 3",
 						image_url:"https://cdn-maf1.heartyhosting.com/sites/muscleandfitness.com/files/styles/full_node_image_1090x614/public/media/dumbbells-on-floor.jpg?itok=YyIzb6d3",
 						subtitle:"We\'ve got the right hat for everyone.",
 						buttons: [{
@@ -335,6 +342,34 @@ function callSendAPI(messageData) {
 			console.log("Successfully sent generic message with id %s to recipient %s",
 				messageId, recipientId);
 		} else {
+			console.error("Unable to send message.");
+			console.error(response);
+			console.error(error);
+		}
+	});
+}
+
+function getStarted(res) {
+	var messageData = {
+		get_started:{
+			payload:"GET_STARTED_PAYLOAD"
+		}
+	};
+
+	request({
+		uri: 'https://graph.facebook.com/v2.6/me/messenger_profile',
+		qs: { access_token: PAGE_ACCESS_TOKEN },
+		method: 'POST',
+		headers: {'Content-Type': 'application/json'},
+		json: messageData
+
+	}, function(error, response, body) {
+		if (!error && response.statusCode == 200) {
+			res.send(body);
+
+			console.log("Successfully sent Get Started Page");
+		} else {
+			res.send(body);
 			console.error("Unable to send message.");
 			console.error(response);
 			console.error(error);
