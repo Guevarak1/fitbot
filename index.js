@@ -185,6 +185,11 @@ function sendQuickRepliesMessage(recipientId, messageText) {
 				"content_type":"text",
 				"title":"Back",
 				"payload":"DEVELOPER_DEFINED_PAYLOAD_FOR_PICKING_BACK"
+			},
+			{
+				"content_type":"text",
+				"title":"Shoulders",
+				"payload":"DEVELOPER_DEFINED_PAYLOAD_FOR_PICKING_SHOULDERS"
 			}
 			]
 		}
