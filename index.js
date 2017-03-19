@@ -97,6 +97,9 @@ function receivedMessage(event) {
         	case 'list':
         	sendListMessage(senderID);
         	break;
+        	case 'quick':
+        	sendListMessage(senderID);
+        	break;
         	default:
         	sendTextMessage(senderID, messageText);
         }
@@ -125,6 +128,15 @@ function receivedPostback(event) {
 			case 'DEVELOPER_DEFINED_PAYLOAD':
 			sendTextMessage(senderID, 'hit generic payload');
 			break;
+			case 'DEVELOPER_DEFINED_PAYLOAD_FOR_PICKING_CHEST':
+			sendTextMessage(senderID, 'hit chest payload');
+			break;
+			case 'DEVELOPER_DEFINED_PAYLOAD_FOR_PICKING_LEGS':
+			sendTextMessage(senderID, 'hit legs payload');
+			break;
+			case 'DEVELOPER_DEFINED_PAYLOAD_FOR_PICKING_BACK':
+			sendTextMessage(senderID, 'hit back payload');
+			break;
 			case 'GET_STARTED_PAYLOAD':
 			sendTextMessage(senderID, 'Hi ,I\'m Fitbot ,and I was created to help you choose exercises.');
 			break;
@@ -146,6 +158,37 @@ function sendTextMessage(recipientId, messageText) {
 
 	callSendAPI(messageData);
 }
+
+function sendQuickRepliesMessage(recipientId, messageText) {
+	var messageData = {
+		recipient: {
+			id: recipientId
+		},
+		"message":{
+			"text":"Pick a muscle group:",
+			"quick_replies":[
+			{
+				"content_type":"text",
+				"title":"Chest",
+				"payload":"DEVELOPER_DEFINED_PAYLOAD_FOR_PICKING_CHEST"
+			},
+			{
+				"content_type":"text",
+				"title":"Legs",
+				"payload":"DEVELOPER_DEFINED_PAYLOAD_FOR_PICKING_LEGS"
+			},
+			{
+				"content_type":"text",
+				"title":"Back",
+				"payload":"DEVELOPER_DEFINED_PAYLOAD_FOR_PICKING_BACK"
+			}
+			]
+		}
+	};
+
+	callSendAPI(messageData);
+}
+
 
 function sendButtonMessage(recipientId) {
 	var messageData = {
