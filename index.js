@@ -186,7 +186,13 @@ function sendGenericMessage(recipientId){
 							type: "web_url",
 							url: "https://google.com",
 							title: "Show Website"
-						}, {
+						},
+						{
+							type: "web_url",
+							url: "https://google.com",
+							title: "Show Website again"
+						},
+						{
 							type: "postback",
 							title: "Start Chatting",
 							payload: "DEVELOPER_DEFINED_PAYLOAD"
