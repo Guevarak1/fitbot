@@ -98,7 +98,7 @@ function receivedMessage(event) {
         	sendListMessage(senderID);
         	break;
         	case 'quick':
-        	sendListMessage(senderID);
+        	sendQuickRepliesMessage(senderID);
         	break;
         	default:
         	sendTextMessage(senderID, messageText);
