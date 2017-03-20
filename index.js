@@ -146,8 +146,7 @@ function receivedPostback(event) {
                 sendTextMessage(senderID, 'hit shoulders payload');
                 break;
             case 'GET_STARTED_PAYLOAD':
-                sendTextMessage(senderID, 'Hi ,I\'m Fitbot ,and I was created to help you choose different exercises.');
-                sendQuickRepliesMessage(senderID);
+                sendQuickRepliesMessage(senderID, 'Hi, I\'m Fitbot and I was created to help you choose different exercises.');
                 break;
             default:
                 sendTextMessage(senderID, payload);
@@ -174,7 +173,7 @@ function sendQuickRepliesMessage(recipientId, messageText) {
             id: recipientId
         },
         "message": {
-            "text": "Pick a muscle group:",
+            "text": messageText,
             "quick_replies": [{
                 "content_type": "text",
                 "title": "Chest",
