@@ -146,7 +146,8 @@ function receivedPostback(event) {
                 sendTextMessage(senderID, 'hit shoulders payload');
                 break;
             case 'GET_STARTED_PAYLOAD':
-                sendTextMessage(senderID, 'Hi ,I\'m Fitbot ,and I was created to help you choose exercises.');
+                sendTextMessage(senderID, 'Hi ,I\'m Fitbot ,and I was created to help you choose different exercises.');
+                sendQuickRepliesMessage(senderID);
                 break;
             default:
                 sendTextMessage(senderID, payload);
