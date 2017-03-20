@@ -102,7 +102,7 @@ function receivedMessage(event) {
                 sendListMessage(senderID);
                 break;
             case 'quick':
-                sendQuickRepliesMessage(senderID);
+                sendQuickRepliesMessage(senderID, "select an exercise:");
                 break;
 
             default:
