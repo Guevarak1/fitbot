@@ -149,7 +149,7 @@ function receivedPostback(event) {
                 sendQuickRepliesMessage(senderID, 'Hi, I\'m Fitbot and I was created to help you choose different exercises.');
                 break;
             default:
-                sendTextMessage(senderID, payload);
+                sendTextMessage(senderID, "payload not set up");
         }
     }
 }
