@@ -54,12 +54,12 @@ app.post('/webhook/', function(req, res) {
             // Iterate over each messaging event
             entry.messaging.forEach(function(event) {
             	if(event.message.quick_reply){
-            		receivedPostback(event)
+            		receivedPostback(event , "quick")
             	}
             	else if (event.message) {
             		receivedMessage(event);
             	} else if (event.postback) {
-            		receivedPostback(event)
+            		receivedPostback(event, "regular")
             	} else {
             		console.log("Webhook received unknown event: ", event);
             	}
@@ -117,13 +117,18 @@ function receivedMessage(event) {
         }
     }
 
-    function receivedPostback(event) {
+    function receivedPostback(event, type) {
     	var senderID = event.sender.id;
     	var recipientID = event.recipient.id;
     	var timeOfMessage = event.timestamp;
 
-    	var payload = event.postback.payload;
-    	var quick_reply_payload = event.message.quick_reply.payload
+    	if(type == "regualr"){
+    		var payload = event.postback.payload;	
+    	}
+    	else{
+    		var quick_reply_payload = event.message.quick_reply.payload	
+    	}
+    	
     	console.log("Received message for user %d and page %d at %d with message:",
     		senderID, recipientID, timeOfMessage);
     	console.log(JSON.stringify(payload));
