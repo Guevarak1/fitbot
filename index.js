@@ -106,7 +106,8 @@ function receivedMessage(event) {
                 break;
 
             default:
-                sendTextMessage(senderID, "messageText");
+            //############################################################
+                sendTextMessage(senderID, messageText); //somethings wrong here. postback comes back as message for some reason                
         }
     } else if (messageAttachments) {
         sendTextMessage(senderID, "Message with attachment received");
@@ -172,24 +173,24 @@ function sendQuickRepliesMessage(recipientId, messageText) {
         recipient: {
             id: recipientId
         },
-        "message": {
-            "text": messageText,
-            "quick_replies": [{
-                "content_type": "text",
-                "title": "Chest",
-                "payload": "DEVELOPER_DEFINED_PAYLOAD_FOR_PICKING_CHEST"
+        message: {
+            text: messageText,
+            quick_replies: [{
+                content_type: "text",
+                title: "Chest",
+                payload: "DEVELOPER_DEFINED_PAYLOAD_FOR_PICKING_CHEST"
             }, {
-                "content_type": "text",
-                "title": "Legs",
-                "payload": "DEVELOPER_DEFINED_PAYLOAD_FOR_PICKING_LEGS"
+                content_type: "text",
+                title: "Legs",
+                payload: "DEVELOPER_DEFINED_PAYLOAD_FOR_PICKING_LEGS"
             }, {
-                "content_type": "text",
-                "title": "Back",
-                "payload": "DEVELOPER_DEFINED_PAYLOAD_FOR_PICKING_BACK"
+                content_type: "text",
+                title: "Back",
+                payload: "DEVELOPER_DEFINED_PAYLOAD_FOR_PICKING_BACK"
             }, {
-                "content_type": "text",
-                "title": "Shoulders",
-                "payload": "DEVELOPER_DEFINED_PAYLOAD_FOR_PICKING_SHOULDERS"
+                content_type: "text",
+                title: "Shoulders",
+                payload: "DEVELOPER_DEFINED_PAYLOAD_FOR_PICKING_SHOULDERS"
             }]
         }
     };
