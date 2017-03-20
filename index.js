@@ -53,7 +53,10 @@ app.post('/webhook/', function(req, res) {
 
             // Iterate over each messaging event
             entry.messaging.forEach(function(event) {
-            	if (event.message) {
+            	if(event.message.quick_reply){
+            		receivedPostback(event)
+            	}
+            	else if (event.message) {
             		receivedMessage(event);
             	} else if (event.postback) {
             		receivedPostback(event)
@@ -120,7 +123,7 @@ function receivedMessage(event) {
     	var timeOfMessage = event.timestamp;
 
     	var payload = event.postback.payload;
-
+    	var quick_reply_payload = event.message.quick_reply.payload
     	console.log("Received message for user %d and page %d at %d with message:",
     		senderID, recipientID, timeOfMessage);
     	console.log(JSON.stringify(payload));
@@ -151,6 +154,26 @@ function receivedMessage(event) {
     			break;
     			default:
     			sendTextMessage(senderID, "payload not set up");
+    		}
+    	}
+
+    	else if(quick_reply_payload){
+    		switch (quick_reply_payload){
+    			case 'GET_STARTED_PAYLOAD':
+    			sendQuickRepliesMessage(senderID, 'Hi, I\'m Fitbot and I was created to help you choose different exercises.');
+    			break;
+    			case 'DEVELOPER_DEFINED_PAYLOAD_FOR_PICKING_LEGS':
+    			sendTextMessage(senderID, 'hit legs payload');
+    			break;
+    			case 'DEVELOPER_DEFINED_PAYLOAD_FOR_PICKING_BACK':
+    			sendTextMessage(senderID, 'hit back payload');
+    			break;
+    			case 'DEVELOPER_DEFINED_PAYLOAD_FOR_PICKING_SHOULDERS':
+    			sendTextMessage(senderID, 'hit shoulders payload');
+    			break;
+    			default:
+    			sendTextMessage(senderID, "payload not set up");
+
     		}
     	}
     }
