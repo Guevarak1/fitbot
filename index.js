@@ -27,6 +27,11 @@ app.get('/setupMessage', function(req, res) {
     getStartedMessage(res);
 });
 
+app.get('/setupPersistantMenu', function(req, res) {
+    persistantMenu(res);
+});
+
+
 // respond to facebook's verification
 app.get('/webhook', function(req, res) {
     if (req.query['hub.mode'] === 'subscribe' &&
@@ -163,6 +168,9 @@ function receivedPostback(event, type) {
         switch (quick_reply_payload) {
             case 'GET_STARTED_PAYLOAD':
                 sendQuickRepliesMessage(senderID, 'Hi, I\'m Fitbot and I was created to help you choose different exercises.');
+                break;
+            case 'SELECT_AN_EXERCISE':
+                sendQuickRepliesMessage(senderID, 'select an exercise: ');
                 break;
             case 'DEVELOPER_DEFINED_PAYLOAD_FOR_PICKING_CHEST':
                 sendTextMessage(senderID, 'hit chest payload');
@@ -401,6 +409,40 @@ function getStartedButton(res) {
         get_started: {
             payload: "GET_STARTED_PAYLOAD"
         }
+    };
+
+    request({
+        uri: 'https://graph.facebook.com/v2.6/me/messenger_profile',
+        qs: { access_token: PAGE_ACCESS_TOKEN },
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        json: messageData
+
+    }, function(error, response, body) {
+        if (!error && response.statusCode == 200) {
+            res.send(body);
+
+            console.log("Successfully sent Get Started Page");
+        } else {
+            res.send(body);
+            console.error("Unable to send message.");
+            console.error(response);
+            console.error(error);
+        }
+    });
+}
+
+function persistantMenu(res) {
+    var messageData = {
+        "persistent_menu": [{
+            "locale": "default",
+            "composer_input_disabled": true,
+            "call_to_actions": [{
+                "type": "postback",
+                "title": "Select a different exercise",
+                "payload": "SELECT_AN_EXERCISE"
+            }]
+        }]
     };
 
     request({
