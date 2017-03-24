@@ -173,16 +173,16 @@ function receivedPostback(event, type) {
                 sendQuickRepliesMessage(senderID, 'select an exercise: ');
                 break;
             case 'DEVELOPER_DEFINED_PAYLOAD_FOR_PICKING_CHEST':
-                sendTextMessage(senderID, 'hit chest payload');
+                sendGenericMessage(senderID, 'Chest');
                 break;
             case 'DEVELOPER_DEFINED_PAYLOAD_FOR_PICKING_LEGS':
-                sendTextMessage(senderID, 'hit legs payload');
+                sendGenericMessage(senderID, 'Legs');
                 break;
             case 'DEVELOPER_DEFINED_PAYLOAD_FOR_PICKING_BACK':
-                sendTextMessage(senderID, 'hit back payload');
+                sendGenericMessage(senderID, 'Back');
                 break;
             case 'DEVELOPER_DEFINED_PAYLOAD_FOR_PICKING_SHOULDERS':
-                sendTextMessage(senderID, 'hit shoulders payload');
+                sendGenericMessage(senderID, 'Shoulders');
                 break;
             default:
                 sendTextMessage(senderID, "payload not set up");
@@ -210,14 +210,14 @@ function sendQuickRepliesMessage(recipientId, messageText) {
             id: recipientId
         },
         "message": {
-            "text": "Pick a color:",
+            "text": "Select an exercise:",
             "quick_replies": [{
                 "content_type": "text",
-                "title": "Red",
+                "title": "Chest",
                 "payload": "DEVELOPER_DEFINED_PAYLOAD_FOR_PICKING_CHEST"
             }, {
                 "content_type": "text",
-                "title": "Green",
+                "title": "Legs",
                 "payload": "DEVELOPER_DEFINED_PAYLOAD_FOR_PICKING_LEGS"
             }]
         }
@@ -254,7 +254,7 @@ function sendButtonMessage(recipientId) {
     callSendAPI(messageData);
 }
 
-function sendGenericMessage(recipientId) {
+function sendGenericMessage(recipientId, muscleGroup) {
     var messageData = {
         recipient: {
             id: recipientId
@@ -265,7 +265,7 @@ function sendGenericMessage(recipientId) {
                 payload: {
                     template_type: "generic",
                     elements: [{
-                        title: "exercise 1",
+                        title: muscleGroup + ": exercise 1",
                         image_url: "https://cdn-maf1.heartyhosting.com/sites/muscleandfitness.com/files/styles/full_node_image_1090x614/public/media/dumbbells-on-floor.jpg?itok=YyIzb6d3",
                         subtitle: "We\'ve got the right hat for everyone.",
                         buttons: [{
@@ -282,7 +282,7 @@ function sendGenericMessage(recipientId) {
                             payload: "DEVELOPER_DEFINED_PAYLOAD"
                         }]
                     }, {
-                        title: "exercise 2",
+                        title: muscleGroup + ": exercise 2",
                         image_url: "https://cdn-maf1.heartyhosting.com/sites/muscleandfitness.com/files/styles/full_node_image_1090x614/public/media/dumbbells-on-floor.jpg?itok=YyIzb6d3",
                         subtitle: "We\'ve got the right hat for everyone.",
                         buttons: [{
@@ -299,7 +299,7 @@ function sendGenericMessage(recipientId) {
                             payload: "DEVELOPER_DEFINED_PAYLOAD"
                         }]
                     }, {
-                        title: "exercise 3",
+                        title:muscleGroup + ": exercise 3",
                         image_url: "https://cdn-maf1.heartyhosting.com/sites/muscleandfitness.com/files/styles/full_node_image_1090x614/public/media/dumbbells-on-floor.jpg?itok=YyIzb6d3",
                         subtitle: "We\'ve got the right hat for everyone.",
                         buttons: [{
