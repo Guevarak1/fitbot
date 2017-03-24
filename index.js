@@ -161,6 +161,9 @@ function receivedPostback(event, type) {
             case 'GET_STARTED_PAYLOAD':
                 sendQuickRepliesMessage(senderID, 'Hi, I\'m Fitbot and I was created to help you choose different exercises.');
                 break;
+            case 'SELECT_AN_EXERCISE':
+                sendQuickRepliesMessage(senderID, 'select an exercise: ');
+                break;
             default:
                 sendTextMessage(senderID, "payload not set up");
         }
@@ -168,9 +171,6 @@ function receivedPostback(event, type) {
         switch (quick_reply_payload) {
             case 'GET_STARTED_PAYLOAD':
                 sendQuickRepliesMessage(senderID, 'Hi, I\'m Fitbot and I was created to help you choose different exercises.');
-                break;
-            case 'SELECT_AN_EXERCISE':
-                sendQuickRepliesMessage(senderID, 'select an exercise: ');
                 break;
             case 'DEVELOPER_DEFINED_PAYLOAD_FOR_PICKING_CHEST':
                 sendGenericMessage(senderID, 'Chest');
