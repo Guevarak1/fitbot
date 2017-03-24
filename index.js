@@ -113,7 +113,7 @@ function receivedMessage(event) {
             // case 'quick':
             //     sendQuickRepliesMessage(senderID, "select an exercise:");
             //     break;
-        	case 'easter':
+            case 'easter':
                 sendTextMessage(senderID, "egg");
                 break;
             default:
@@ -142,24 +142,24 @@ function receivedPostback(event, type) {
     if (payload) {
 
         switch (payload) {
-            case 'USER_DEFINED_PAYLOAD':
-                sendTextMessage(senderID, 'hit payload');
-                break;
-            case 'DEVELOPER_DEFINED_PAYLOAD':
-                sendTextMessage(senderID, 'hit generic payload');
-                break;
-            case 'DEVELOPER_DEFINED_PAYLOAD_FOR_PICKING_CHEST':
-                sendTextMessage(senderID, 'hit chest payload');
-                break;
-            case 'DEVELOPER_DEFINED_PAYLOAD_FOR_PICKING_LEGS':
-                sendTextMessage(senderID, 'hit legs payload');
-                break;
-            case 'DEVELOPER_DEFINED_PAYLOAD_FOR_PICKING_BACK':
-                sendTextMessage(senderID, 'hit back payload');
-                break;
-            case 'DEVELOPER_DEFINED_PAYLOAD_FOR_PICKING_SHOULDERS':
-                sendTextMessage(senderID, 'hit shoulders payload');
-                break;
+            // case 'USER_DEFINED_PAYLOAD':
+            //     sendTextMessage(senderID, 'hit payload');
+            //     break;
+            // case 'DEVELOPER_DEFINED_PAYLOAD':
+            //     sendTextMessage(senderID, 'hit generic payload');
+            //     break;
+            // case 'DEVELOPER_DEFINED_PAYLOAD_FOR_PICKING_CHEST':
+            //     sendTextMessage(senderID, 'hit chest payload');
+            //     break;
+            // case 'DEVELOPER_DEFINED_PAYLOAD_FOR_PICKING_LEGS':
+            //     sendTextMessage(senderID, 'hit legs payload');
+            //     break;
+            // case 'DEVELOPER_DEFINED_PAYLOAD_FOR_PICKING_BACK':
+            //     sendTextMessage(senderID, 'hit back payload');
+            //     break;
+            // case 'DEVELOPER_DEFINED_PAYLOAD_FOR_PICKING_SHOULDERS':
+            //     sendTextMessage(senderID, 'hit shoulders payload');
+            //     break;
             case 'GET_STARTED_PAYLOAD':
                 sendQuickRepliesMessage(senderID, 'Hi, I\'m Fitbot and I was created to help you choose different exercises.');
                 break;
@@ -236,7 +236,6 @@ function sendQuickRepliesMessage(recipientId, messageText) {
     callSendAPI(messageData);
 }
 
-
 function sendButtonMessage(recipientId) {
     var messageData = {
         recipient: {
@@ -309,7 +308,7 @@ function sendGenericMessage(recipientId, muscleGroup) {
                             payload: "DEVELOPER_DEFINED_PAYLOAD"
                         }]
                     }, {
-                        title:muscleGroup + ": exercise 3",
+                        title: muscleGroup + ": exercise 3",
                         image_url: "https://cdn-maf1.heartyhosting.com/sites/muscleandfitness.com/files/styles/full_node_image_1090x614/public/media/dumbbells-on-floor.jpg?itok=YyIzb6d3",
                         subtitle: "We\'ve got the right hat for everyone.",
                         buttons: [{
@@ -414,13 +413,7 @@ function callSendAPI(messageData) {
     });
 }
 
-function getStartedButton(res) {
-    var messageData = {
-        get_started: {
-            payload: "GET_STARTED_PAYLOAD"
-        }
-    };
-
+function callSendMessengerProfileAPI(messageData) {
     request({
         uri: 'https://graph.facebook.com/v2.6/me/messenger_profile',
         qs: { access_token: PAGE_ACCESS_TOKEN },
@@ -432,7 +425,7 @@ function getStartedButton(res) {
         if (!error && response.statusCode == 200) {
             res.send(body);
 
-            console.log("Successfully sent Get Started Page");
+            console.log("Successfully sent messenger_profile page");
         } else {
             res.send(body);
             console.error("Unable to send message.");
@@ -440,6 +433,16 @@ function getStartedButton(res) {
             console.error(error);
         }
     });
+}
+
+function getStartedButton(res) {
+    var messageData = {
+        get_started: {
+            payload: "GET_STARTED_PAYLOAD"
+        }
+    };
+
+    callSendMessengerProfileAPI(messageData);
 }
 
 function persistantMenu(res) {
@@ -455,25 +458,7 @@ function persistantMenu(res) {
         }]
     };
 
-    request({
-        uri: 'https://graph.facebook.com/v2.6/me/messenger_profile',
-        qs: { access_token: PAGE_ACCESS_TOKEN },
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        json: messageData
-
-    }, function(error, response, body) {
-        if (!error && response.statusCode == 200) {
-            res.send(body);
-
-            console.log("Successfully sent persistent_menu Page");
-        } else {
-            res.send(body);
-            console.error("Unable to send message.");
-            console.error(response);
-            console.error(error);
-        }
-    });
+    callSendMessengerProfileAPI(messageData);
 }
 
 
@@ -488,23 +473,5 @@ function getStartedMessage(res) {
         }]
     };
 
-    request({
-        uri: 'https://graph.facebook.com/v2.6/me/messenger_profile',
-        qs: { access_token: PAGE_ACCESS_TOKEN },
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        json: messageData
-
-    }, function(error, response, body) {
-        if (!error && response.statusCode == 200) {
-            res.send(body);
-
-            console.log("Successfully sent Get Started Page");
-        } else {
-            res.send(body);
-            console.error("Unable to send message.");
-            console.error(response);
-            console.error(error);
-        }
-    });
+    callSendMessengerProfileAPI(messageData);
 }
