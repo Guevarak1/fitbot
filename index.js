@@ -122,7 +122,7 @@ function receivedPostback(event, type) {
     var recipientID = event.recipient.id;
     var timeOfMessage = event.timestamp;
 
-    if (type == "regualr") {
+    if (type == "regular") {
         var payload = event.postback.payload;
     } else {
         var quick_reply_payload = event.message.quick_reply.payload
