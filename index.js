@@ -101,21 +101,23 @@ function receivedMessage(event) {
         // If we receive a text message, check to see if it matches a keyword
         // and send back the example. Otherwise, just echo the text we received.
         switch (messageText) {
-            case 'button':
-                sendButtonMessage(senderID);
+            // case 'button':
+            //     sendButtonMessage(senderID);
+            //     break;
+            // case 'generic':
+            //     sendGenericMessage(senderID);
+            //     break;
+            // case 'list':
+            //     sendListMessage(senderID);
+            //     break;
+            // case 'quick':
+            //     sendQuickRepliesMessage(senderID, "select an exercise:");
+            //     break;
+        	case 'easter':
+                sendTextMessage(senderID, "egg");
                 break;
-            case 'generic':
-                sendGenericMessage(senderID);
-                break;
-            case 'list':
-                sendListMessage(senderID);
-                break;
-            case 'quick':
-                sendQuickRepliesMessage(senderID, "select an exercise:");
-                break;
-
             default:
-                sendTextMessage(senderID, messageText);
+                sendTextMessage(senderID, "tap on the menu option to get started!");
         }
     } else if (messageAttachments) {
         sendTextMessage(senderID, "Message with attachment received");
