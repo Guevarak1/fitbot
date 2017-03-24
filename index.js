@@ -456,7 +456,7 @@ function persistantMenu(res) {
         if (!error && response.statusCode == 200) {
             res.send(body);
 
-            console.log("Successfully sent Get Started Page");
+            console.log("Successfully sent persistent_menu Page");
         } else {
             res.send(body);
             console.error("Unable to send message.");
