@@ -1,6 +1,11 @@
 var VERIFY_TOKEN = 'blondiebytes';
 var PAGE_ACCESS_TOKEN = 'EAACngySG46UBAPbnA5ARqr7bLT5iA4YOGYl3frRBuSpwPpDh2Cj5J6DpJP6E7YmZCLH7ZA3LT2xIzsDdWsqxxM8RtrZAP4Bod1ZA7D13CjPrRxZAGvLe6HQHl0nZCALtZBlhRb4GvpZAOZBQZBvMx87IZAUPPXv647JfZCsqDuXx00MlWgZDZD';
 
+var CHEST_CATEGORY = "8";
+var LEGS_CATEGORY = "9";
+var SHOULDERS_CATEGORY = "13";
+var BACK_CATEGORY = "12";
+
 var express = require('express');
 var app = express();
 var bodyParser = require('body-parser');
@@ -175,16 +180,16 @@ function receivedPostback(event, type) {
                 sendQuickRepliesMessage(senderID, 'Hi, I\'m Fitbot and I was created to help you choose different exercises.');
                 break;
             case 'DEVELOPER_DEFINED_PAYLOAD_FOR_PICKING_CHEST':
-                sendGenericMessage(senderID, 'Chest');
+                sendGenericMessage(senderID, 'CHEST_CATEGORY');
                 break;
             case 'DEVELOPER_DEFINED_PAYLOAD_FOR_PICKING_LEGS':
-                sendGenericMessage(senderID, 'Legs');
+                sendGenericMessage(senderID, 'LEGS_CATEGORY');
                 break;
             case 'DEVELOPER_DEFINED_PAYLOAD_FOR_PICKING_BACK':
-                sendGenericMessage(senderID, 'Back');
+                sendGenericMessage(senderID, 'BACK_CATEGORY');
                 break;
             case 'DEVELOPER_DEFINED_PAYLOAD_FOR_PICKING_SHOULDERS':
-                sendGenericMessage(senderID, 'Shoulders');
+                sendGenericMessage(senderID, 'SHOULDERS_CATEGORY');
                 break;
             default:
                 sendTextMessage(senderID, "payload not set up");
@@ -232,7 +237,7 @@ function sendQuickRepliesMessage(recipientId, messageText) {
             }]
         }
     };
-
+    //callWgerAPI();
     callSendAPI(messageData);
 }
 
@@ -263,7 +268,7 @@ function sendButtonMessage(recipientId) {
     callSendAPI(messageData);
 }
 
-function sendGenericMessage(recipientId, muscleGroup) {
+function sendGenericMessage(recipientId, muscleCategory) {
     var messageData = {
         recipient: {
             id: recipientId
@@ -274,7 +279,7 @@ function sendGenericMessage(recipientId, muscleGroup) {
                 payload: {
                     template_type: "generic",
                     elements: [{
-                        title: muscleGroup + ": exercise 1",
+                        title: muscleCategory + ": exercise 1",
                         image_url: "https://cdn-maf1.heartyhosting.com/sites/muscleandfitness.com/files/styles/full_node_image_1090x614/public/media/dumbbells-on-floor.jpg?itok=YyIzb6d3",
                         subtitle: "We\'ve got the right hat for everyone.",
                         buttons: [{
@@ -291,7 +296,7 @@ function sendGenericMessage(recipientId, muscleGroup) {
                             payload: "DEVELOPER_DEFINED_PAYLOAD"
                         }]
                     }, {
-                        title: muscleGroup + ": exercise 2",
+                        title: muscleCategory + ": exercise 2",
                         image_url: "https://cdn-maf1.heartyhosting.com/sites/muscleandfitness.com/files/styles/full_node_image_1090x614/public/media/dumbbells-on-floor.jpg?itok=YyIzb6d3",
                         subtitle: "We\'ve got the right hat for everyone.",
                         buttons: [{
@@ -308,7 +313,7 @@ function sendGenericMessage(recipientId, muscleGroup) {
                             payload: "DEVELOPER_DEFINED_PAYLOAD"
                         }]
                     }, {
-                        title: muscleGroup + ": exercise 3",
+                        title: muscleCategory + ": exercise 3",
                         image_url: "https://cdn-maf1.heartyhosting.com/sites/muscleandfitness.com/files/styles/full_node_image_1090x614/public/media/dumbbells-on-floor.jpg?itok=YyIzb6d3",
                         subtitle: "We\'ve got the right hat for everyone.",
                         buttons: [{
@@ -395,6 +400,29 @@ function callSendAPI(messageData) {
     request({
         uri: 'https://graph.facebook.com/v2.6/me/messages',
         qs: { access_token: PAGE_ACCESS_TOKEN },
+        method: 'POST',
+        json: messageData
+
+    }, function(error, response, body) {
+        if (!error && response.statusCode == 200) {
+            var recipientId = body.recipient_id;
+            var messageId = body.message_id;
+
+            console.log("Successfully sent generic message with id %s to recipient %s",
+                messageId, recipientId);
+        } else {
+            console.error("Unable to send message.");
+            console.error(response);
+            console.error(error);
+        }
+    });
+}
+
+
+function callWgerAPI(category) {
+    request({
+        uri: 'https://graph.facebook.com/v2.6/me/messages',
+        //qs: { access_token: PAGE_ACCESS_TOKEN },
         method: 'POST',
         json: messageData
 
