@@ -427,8 +427,7 @@ function callWgerAPI(category) {
     }, function(error, response, body) {
         if (!error && response.statusCode == 200) {
 
-            console.log("===================Successfully sent WGER message with id %s to recipient %s=============",
-                messageId, recipientId);
+            console.log("===================Successfully sent WGER ===================");
             console.log(body);
         } else {
             console.error("Unable to send message.");
