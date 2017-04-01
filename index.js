@@ -422,7 +422,7 @@ function callSendAPI(messageData) {
 function callWgerAPI(category) {
     request({
         uri: 'https://wger.de/api/v2/exercise',
-        qs: {format: "json", muscle: category}
+        qs: {format: "json", category: category}
 
     }, function(error, response, body) {
         if (!error && response.statusCode == 200) {
