@@ -145,26 +145,7 @@ function receivedPostback(event, type) {
     console.log(JSON.stringify(payload));
 
     if (payload) {
-
         switch (payload) {
-            // case 'USER_DEFINED_PAYLOAD':
-            //     sendTextMessage(senderID, 'hit payload');
-            //     break;
-            // case 'DEVELOPER_DEFINED_PAYLOAD':
-            //     sendTextMessage(senderID, 'hit generic payload');
-            //     break;
-            // case 'DEVELOPER_DEFINED_PAYLOAD_FOR_PICKING_CHEST':
-            //     sendTextMessage(senderID, 'hit chest payload');
-            //     break;
-            // case 'DEVELOPER_DEFINED_PAYLOAD_FOR_PICKING_LEGS':
-            //     sendTextMessage(senderID, 'hit legs payload');
-            //     break;
-            // case 'DEVELOPER_DEFINED_PAYLOAD_FOR_PICKING_BACK':
-            //     sendTextMessage(senderID, 'hit back payload');
-            //     break;
-            // case 'DEVELOPER_DEFINED_PAYLOAD_FOR_PICKING_SHOULDERS':
-            //     sendTextMessage(senderID, 'hit shoulders payload');
-            //     break;
             case 'GET_STARTED_PAYLOAD':
                 sendQuickRepliesMessage(senderID, 'Hi, I\'m Fitbot and I was created to help you choose different exercises.');
                 break;
@@ -180,16 +161,36 @@ function receivedPostback(event, type) {
                 sendQuickRepliesMessage(senderID, 'Hi, I\'m Fitbot and I was created to help you choose different exercises.');
                 break;
             case 'DEVELOPER_DEFINED_PAYLOAD_FOR_PICKING_CHEST':
-                sendGenericMessage(senderID, 'CHEST_CATEGORY');
+            	
+
+            	callWgerAPI(CHEST_CATEGORY);
+                
+
+                sendGenericMessage(senderID, CHEST_CATEGORY);
                 break;
             case 'DEVELOPER_DEFINED_PAYLOAD_FOR_PICKING_LEGS':
-                sendGenericMessage(senderID, 'LEGS_CATEGORY');
+
+
+            	callWgerAPI(LEGS_CATEGORY);
+                
+
+                sendGenericMessage(senderID, LEGS_CATEGORY);
                 break;
             case 'DEVELOPER_DEFINED_PAYLOAD_FOR_PICKING_BACK':
-                sendGenericMessage(senderID, 'BACK_CATEGORY');
+
+
+            	callWgerAPI(BACK_CATEGORY);
+                
+
+                sendGenericMessage(senderID, BACK_CATEGORY);
                 break;
             case 'DEVELOPER_DEFINED_PAYLOAD_FOR_PICKING_SHOULDERS':
-                sendGenericMessage(senderID, 'SHOULDERS_CATEGORY');
+
+
+            	callWgerAPI(SHOULDERS_CATEGORY);
+                
+
+                sendGenericMessage(senderID, SHOULDERS_CATEGORY);
                 break;
             default:
                 sendTextMessage(senderID, "payload not set up");
@@ -198,6 +199,7 @@ function receivedPostback(event, type) {
     }
 }
 
+//where should i put the call to get the json?
 function sendTextMessage(recipientId, messageText) {
     var messageData = {
         recipient: {
@@ -237,7 +239,6 @@ function sendQuickRepliesMessage(recipientId, messageText) {
             }]
         }
     };
-    //callWgerAPI();
     callSendAPI(messageData);
 }
 
@@ -418,21 +419,17 @@ function callSendAPI(messageData) {
     });
 }
 
-
 function callWgerAPI(category) {
     request({
-        uri: 'https://graph.facebook.com/v2.6/me/messages',
-        //qs: { access_token: PAGE_ACCESS_TOKEN },
-        method: 'POST',
-        json: messageData
+        uri: 'https://wger.de/api/v2/',
+        json: {"muscles": category}
 
     }, function(error, response, body) {
         if (!error && response.statusCode == 200) {
-            var recipientId = body.recipient_id;
-            var messageId = body.message_id;
 
-            console.log("Successfully sent generic message with id %s to recipient %s",
+            console.log("===================Successfully sent WGER message with id %s to recipient %s=============",
                 messageId, recipientId);
+            console.log(body);
         } else {
             console.error("Unable to send message.");
             console.error(response);
