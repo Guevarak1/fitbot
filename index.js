@@ -1,7 +1,7 @@
 var VERIFY_TOKEN = 'blondiebytes';
 var PAGE_ACCESS_TOKEN = 'EAACngySG46UBAPbnA5ARqr7bLT5iA4YOGYl3frRBuSpwPpDh2Cj5J6DpJP6E7YmZCLH7ZA3LT2xIzsDdWsqxxM8RtrZAP4Bod1ZA7D13CjPrRxZAGvLe6HQHl0nZCALtZBlhRb4GvpZAOZBQZBvMx87IZAUPPXv647JfZCsqDuXx00MlWgZDZD';
 
-var CHEST_CATEGORY = "8";
+var CHEST_CATEGORY = "11";
 var LEGS_CATEGORY = "9";
 var SHOULDERS_CATEGORY = "13";
 var BACK_CATEGORY = "12";
@@ -422,7 +422,7 @@ function callSendAPI(messageData) {
 function callWgerAPI(category) {
     request({
         uri: 'https://wger.de/api/v2/exercise',
-        qs: {format: "json", category: category}
+        qs: {format: "json", category: category, language: "2"}
 
     }, function(error, response, body) {
         if (!error && response.statusCode == 200) {
