@@ -163,10 +163,10 @@ function receivedPostback(event, type) {
             case 'DEVELOPER_DEFINED_PAYLOAD_FOR_PICKING_CHEST':
             	
 
-            	callWgerAPI(CHEST_CATEGORY);
+            	var info = callWgerAPI(CHEST_CATEGORY);
                 
 
-                sendGenericMessage(senderID, CHEST_CATEGORY);
+                sendGenericMessage(senderID, info.results[0].name);
                 break;
             case 'DEVELOPER_DEFINED_PAYLOAD_FOR_PICKING_LEGS':
 
@@ -174,7 +174,7 @@ function receivedPostback(event, type) {
             	callWgerAPI(LEGS_CATEGORY);
                 
 
-                sendGenericMessage(senderID, LEGS_CATEGORY);
+                sendGenericMessage(senderID, info.results[0].name);
                 break;
             case 'DEVELOPER_DEFINED_PAYLOAD_FOR_PICKING_BACK':
 
@@ -182,7 +182,7 @@ function receivedPostback(event, type) {
             	callWgerAPI(BACK_CATEGORY);
                 
 
-                sendGenericMessage(senderID, BACK_CATEGORY);
+                sendGenericMessage(senderID, info.results[0].name);
                 break;
             case 'DEVELOPER_DEFINED_PAYLOAD_FOR_PICKING_SHOULDERS':
 
@@ -190,7 +190,7 @@ function receivedPostback(event, type) {
             	callWgerAPI(SHOULDERS_CATEGORY);
                 
 
-                sendGenericMessage(senderID, SHOULDERS_CATEGORY);
+                sendGenericMessage(senderID, info.results[0].name);
                 break;
             default:
                 sendTextMessage(senderID, "payload not set up");
@@ -429,6 +429,7 @@ function callWgerAPI(category) {
 
             console.log("===================Successfully sent WGER ===================");
             console.log(body);
+            return info = JSON.parse(body);	
         } else {
             console.error("Unable to send message.");
             console.error(response);
